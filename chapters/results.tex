@@ -1,0 +1,165 @@
+\documentclass[../main/thesis_msc.tex]{subfiles}
+
+% Add geometry package to fix type area warning
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+
+\chapter{Results}
+\section{Introduction}
+
+To investigate the neural basis of flight control in \textit{Drosophila melanogaster}, I developed a novel behavioral arena enabling simultaneous 3D tracking and closed-loop optogenetic manipulation during free flight. This experimental platform integrates precise behavioral quantification with targeted neuronal activation to dissect the functional role of descending neurons in flight maneuvers.
+
+The apparatus comprises a cylindrical plexiglass enclosure (50 cm diameter, 30 cm height) surrounded by programmable LED panels for visual stimulus presentation (Figure 1). Six high-speed cameras (100 Hz) mounted above the arena enable real-time 3D tracking using the Braid software platform (Branson et al., 2009). While previous studies employed smaller behavioral chambers (Muijres et al., 2014, 2015; Dickinson et al., 200X), the increased arena volume better accommodates natural flight behaviors and reduces potential boundary effects. The LED panel array provides precise spatiotemporal control of visual stimuli while offering superior modularity and cost-effectiveness compared to projector-based systems (Straw et al., 2017).
+
+The integrated design allows for closed-loop optogenetic activation of specific descending neurons based on the fly's position within the arena, enabling targeted manipulation of neural circuits during naturalistic behavior. This approach combines the analytical power of precise stimulus control with the ecological validity of free flight, providing a robust platform for investigating the neural basis of flight maneuvers.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{example-image-a}
+    \caption{Your caption here}
+    \label{fig:your-label}
+\end{figure}
+
+\section{System Validation and Behavioral Tracking Performance}
+
+The experimental platform's tracking capabilities were systematically validated to establish measurement precision and operational parameters for subsequent behavioral experiments. The system employs six synchronized high-speed cameras (100 Hz) interfaced with the Braid tracking algorithm to reconstruct three-dimensional flight trajectories. While individual identity tracking was not implemented, the system demonstrated robust simultaneous tracking of multiple objects within the arena volume.
+
+Tracking accuracy was quantified through analysis of the system's covariance ($P$) matrices, computed for each tracked position ($x$,$y$,$z$). The $P$ matrix represents the covariance matrix of the Kalman filter state estimate, encoding the system's uncertainty in three-dimensional position prediction. Each element $P_{ij}$ quantifies the covariance between spatial dimensions, with diagonal elements ($P_{ii}$) representing positional variance in each dimension. The trace of $P$ provides a scalar metric of overall tracking uncertainty.
+
+To ensure analysis of genuine flight behavior, trajectories were filtered based on linear velocity, excluding periods of walking or stationary behavior. After filtering, under standard experimental conditions, the mean prediction uncertainty was 0.77 $\pm$ 1.1 mm$^2$ ($n = 61,960$ tracking events across 77 tracked objects). The uncertainty distribution was highly skewed, with the majority of tracking events showing low uncertainty (<2.5 mm$^2$) and a long tail of occasional higher-uncertainty events (Figure 2A).
+
+Regional analysis revealed systematic spatial variation in tracking precision across the arena volume. Overall position uncertainty averaged 0.77 $\pm$ 1.11 mm$^2$ ($n = 61,215$ events), with 50\% of measurements falling between 0.47 and 0.65 mm$^2$. Detailed spatial analysis demonstrated significant heterogeneity in measurement precision across both radial and vertical dimensions (Kruskal-Wallis test, $p < 0.001$ for both distributions).
+
+In the radial dimension, position uncertainty exhibited a clear distance-dependent increase from the arena center. The central region showed highest precision (0.47 $\pm$ 0.08 mm$^2$, $n = 2,106$ events at 0--25 mm radius), with uncertainty progressively increasing toward the periphery (2.29 $\pm$ 3.01 mm$^2$, $n = 627$ events at 200--225 mm radius). This radial variation showed substantial heterogeneity (coefficient of variation = 107.06\% $\pm$ 47.05\%), suggesting non-uniform degradation of tracking performance with increasing radius.
+
+Vertical stratification analysis revealed complementary patterns of spatial dependence. Lower regions exhibited relatively stable tracking (0.57 $\pm$ 0.09 mm$^2$, $n = 1,289$ events at 0--30 mm height), while intermediate heights showed increased variability (1.36 $\pm$ 2.16 mm$^2$, $n = 1,753$ events at 210--240 mm height). The vertical dimension demonstrated even greater relative variability than the radial distribution (coefficient of variation = 130.10\% $\pm$ 44.08\%), indicating that height-dependent factors may more strongly influence measurement precision.
+
+Spatial analysis through heat maps revealed that tracking precision remained largely uniform throughout the central flight volume (Figure 2B,C), with some degradation near the arena boundaries. Analysis of uncertainty with respect to height and radial distance (Figure 2D,E) showed no strong systematic relationships in the primary flight volume, though uncertainty increased slightly at extreme positions. High-uncertainty events appeared randomly distributed throughout the tracking volume (Figure 2F), suggesting these instances represent stochastic tracking difficulties rather than systematic spatial biases.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{example-image-a}
+    \caption{Your caption here}
+    \label{fig:your-label}
+\end{figure}
+
+Analysis of tracking performance revealed systematic dependencies on locomotor parameters, with distinct modulation patterns across both linear and angular velocity domains. Position uncertainty exhibited velocity-dependent variation, suggesting complex interactions between movement dynamics and measurement precision.
+
+Linear velocity analysis demonstrated a non-monotonic relationship with tracking performance. The system exhibited elevated uncertainty during low-velocity movements (1.15 $\pm$ 1.78 mm$^2$ at 0--100 mm/s, $n = 6,045$), potentially reflecting challenges in resolving quasi-static positions or subtle postural adjustments. Tracking precision improved markedly at intermediate velocities (0.74 $\pm$ 1.04 mm$^2$ at 100--200 mm/s, $n = 39,937$) and achieved optimal performance in the highest velocity range (0.55 $\pm$ 0.22 mm$^2$ at 600--700 mm/s, $n = 123$), suggesting enhanced signal-to-noise characteristics during sustained locomotor episodes.
+
+Angular velocity exhibited more pronounced effects on measurement precision, with a clear degradation in tracking reliability at higher rotational speeds. Low angular velocities (0--5 rad/s, $n = 51,105$) yielded the most consistent measurements (0.74 $\pm$ 1.02 mm$^2$), while intermediate rotational speeds (30--35 rad/s, $n = 69$) showed substantially degraded precision (2.05 $\pm$ 3.07 mm$^2$). Notably, extreme angular velocities (55--60 rad/s, $n = 2$) were associated with markedly elevated uncertainty (5.49 $\pm$ 6.56 mm$^2$), though limited sampling in these ranges warrants cautious interpretation.
+These validation metrics establish the experimental platform's reliability for quantitative behavioral analysis and subsequent optogenetic manipulation experiments. The demonstrated tracking precision enables detailed characterization of rapid flight maneuvers and behavioral responses to neural circuit perturbation, with consistent sub-millimeter resolution maintained across diverse experimental conditions.
+
+\section{Flight Trajectory Analysis and Saccade Dynamics}
+
+Flight trajectories exhibited characteristic patterns of straight flight interspersed with sharp and fast turns (saccades). Linear velocities during flight followed a right-skewed distribution with a mean of 176.0 $\pm$ 82.4 mm/s ($n = 61,215$ observations), with 90\% of velocities falling between 85.2 and 338.9 mm/s (5th and 95th percentiles) (Fig.~[A], left). Angular velocities demonstrated a symmetric distribution centered near zero (mean = 3.1 $\pm$ 342.1$^{\circ}$/s), with absolute rotational speeds averaging 172.6 $\pm$ 295.4$^{\circ}$/s (Fig.~[A], right). This distribution reflects distinct behavioral states: stable flight trajectories with minimal turning and rapid rotational maneuvers exceeding 870.0$^{\circ}$/s (95th percentile of absolute angular velocity), consistent with saccadic turning behavior characteristic of \textit{Drosophila} flight.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{example-image-a}
+    \caption{Your caption here}
+    \label{fig:your-label}
+\end{figure}
+
+To systematically characterize saccadic flight behavior, we implemented a peak detection algorithm on the angular velocity time series. Saccades were identified using a threshold criterion of 300$^{\circ}$/s, with minimum inter-saccade intervals of 10 ms.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{example-image-a}
+    \caption{Your caption here}
+    \label{fig:your-label}
+\end{figure}
+Detailed analysis of saccade kinematics demonstrated stereotyped characteristics. Peak angular velocities during saccades averaged 1000 $\pm$ 343$^{\circ}$/s, with durations of 73.3 $\pm$ 27.24 ms. Linear velocity exhibited pronounced modulation during saccadic maneuvers, with a systematic reduction from baseline translational velocities of 175.07 $\pm$ 81.83 mm/s during straight flight segments to 122.50 $\pm$ 67.75 mm/s during turns, representing a 30.0\% decrease in forward velocity during rapid course corrections (Fig.~[C]).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{example-image-a}
+    \caption{Your caption here}
+    \label{fig:your-label}
+\end{figure}
+
+Spatial analysis revealed non-uniform distribution of saccadic events across the arena. Saccade probability increased significantly with distance from the arena center, with [X]\% of events occurring in the peripheral region ($>$200 mm from origin). Additionally, saccade trajectories demonstrated systematic directional biases, with turn angles predominantly distributed between [X] and [Y] degrees (Fig.~[D]). This spatial organization of flight maneuvers indicates active navigation strategies potentially influenced by arena geometry and boundary detection.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{example-image-a}
+    \caption{Your caption here}
+    \label{fig:your-label}
+\end{figure}
+
+The stereotyped nature of these high-velocity turns, coupled with their systematic spatial distribution, suggests that saccadic flight represents a fundamental behavioral module for rapid course correction in arthropod flight control. These findings provide quantitative insights into the underlying sensorimotor algorithms governing spatial navigation in complex environments.
+
+\section{Closed-loop Optogenetic System Validation}
+
+Precise temporal control of neuronal activation during free flight behavior requires rigorous characterization of system latency between stimulus detection and optogenetic activation. The closed-loop stimulation system comprises three primary components: real-time object tracking (100 Hz frame rate), computational decision-making for trigger initiation, and hardware-level light control via an Arduino-controlled Thorlabs illumination system. Each component introduces potential temporal delays that must be quantified to ensure precise correlation between behavioral events and neural manipulation.
+
+Critical to the interpretation of subsequent behavioral experiments is a comprehensive understanding of the total system latency, which encompasses frame acquisition, object position computation, trigger signal generation, and final light activation. This end-to-end delay determines the temporal precision with which specific flight behaviors can be manipulated through optogenetic intervention.
+
+\subsection{Validation of Optogenetic Parameters in Walking Flies}
+
+To establish effective stimulation parameters for flight experiments, we first validated the optogenetic activation system using walking flies expressing csChrimson in descending neurons. Walking behavior provides a robust readout for optogenetic activation, as flies exhibit stereotyped responses to neural perturbation under constrained locomotor conditions.
+
+Individual flies were placed in the behavioral arena and their behavior was recorded at 100 Hz under infrared illumination. The optogenetic stimulus consisted of red light pulses (wavelength: 625 nm) delivered at varying intensities (0--255 arbitrary units, corresponding to 0--10 mW/mm$^2$) for variable durations.
+
+Optogenetic activation produced robust behavioral responses, with stimulus intensities above X a.u. ($\sim$X mW/mm$^2$) reliably triggering locomotor alterations. The behavioral effects manifested as [specific behavior, e.g., ``rapid turning responses'' or ``locomotor arrests''], with a mean latency of [X $\pm$ SD] ms from stimulus onset ($n = N$ flies, $K$ trials). Response probability showed a clear intensity dependence, reaching [X]\% at maximum stimulus intensity. Control flies lacking the csChrimson transgene showed no significant behavioral responses to light stimulation ($n = N$ flies, $p < P$, Fisher's exact test).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{example-image-a}
+    \caption{Your caption here}
+    \label{fig:your-label}
+\end{figure}
+
+\section{Optogenetic Control of Neurons During Flight}
+\subsection{DNaX}
+
+To investigate the role of DNaX neurons in flight control, we expressed CsChrimson in these neurons using the GAL4-UAS system and examined behavioral responses to optogenetic activation during free flight. Previous studies in tethered preparations suggested that DNaX activity correlates with rapid turning behaviors (Schnell et al., 2017), but its function during naturalistic flight remained unexplored.
+
+Individual flies expressing CsChrimson in DNaX neurons were released into the behavioral arena and tracked in real-time. Optogenetic stimulation (625 nm, 200 $\mu$W/mm$^2$, 300 ms duration) was automatically triggered when flies entered a predefined cylindrical volume (5 cm diameter, 20 cm height) centered in the arena.
+
+Analysis of flight trajectories revealed stereotyped behavioral responses to DNaX activation, characterized by rapid saccadic-like turns with a mean latency of 101 $\pm$ 50 ms ($n = 632$ from 10 flies) between stimulus onset and turn initiation. The optogenetically-induced turns exhibited peak angular velocities of 1771.4 $\pm$ 666.0$^{\circ}$/s with durations of 105 $\pm$ 68 ms, resulting in heading changes of 118.1 $\pm$ 55.3 degrees. These responses demonstrated robust behavioral reliability, with flies executing turns in 84\% of stimulation trials, though showing moderate trial-to-trial variability in turn amplitude (CV = 46.8\%) and directional bias (40.7\% rightward turns), suggesting that while the turning response itself was highly consistent, its precise kinematics retained substantial naturalistic variability.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{example-image-a}
+    \caption{Your caption here}
+    \label{fig:your-label}
+\end{figure}
+
+Analysis of flight trajectories revealed systematic biases in turning behavior that correlated with both spatial positioning and stimulus exposure duration. When trajectories were categorized based on time spent within the optogenetic trigger zone (0.1~s, 0.2~s, and 0.3~s), we observed a clear relationship between exposure duration and response magnitude (Figure~X). Flies experiencing longer stimulus durations exhibited progressively larger peak angular velocities (reaching $\sim$30$^{\circ}$/s for 0.3~s exposure compared to $\sim$15$^{\circ}$/s for 0.1~s) and more pronounced decreases in linear velocity during the turn execution phase (0.6--0.8~s). This dose-dependent relationship suggests that prolonged activation of DNaX neurons leads to stronger turning responses, potentially due to increased temporal integration of the optogenetic stimulus.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{example-image-a}
+    \caption{Your caption here}
+    \label{fig:your-label}
+\end{figure}
+
+Further analysis of flight trajectories based on the flies' heading relative to the trigger zone revealed additional behavioral asymmetries (Image~2). Flies approaching the center of the arena (``Towards center'') demonstrated markedly different kinematic profiles compared to those moving away. When heading towards the center, flies exhibited higher peak angular velocities ($\sim$25$^{\circ}$/s vs $\sim$15$^{\circ}$/s) and maintained elevated linear velocities throughout the approach phase (0.4--0.6~s). The distribution of heading changes also showed distinct patterns, with center-approaching flies displaying a broader range of turn amplitudes and a higher probability of large-magnitude turns. These directional biases may reflect an interaction between the optogenetically-induced turning response and the fly's intrinsic navigational state, suggesting that the effectiveness of DNaX activation is modulated by the animal's ongoing behavioral context.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{example-image-a}
+    \caption{Your caption here}
+    \label{fig:your-label}
+\end{figure}
+
+A two-way ANOVA was conducted to examine the effects of incoming linear velocity and time spent in the central zone on peak angular velocity. The analysis revealed a highly significant main effect of time in zone ($F(4, 607) = 48.88$, $p < 0.001$), indicating that the duration spent in the central region strongly influences the peak angular velocity achieved. A significant but smaller main effect was also found for incoming linear velocity ($F(4, 607) = 5.60$, $p < 0.001$). Notably, no significant interaction was observed between time in zone and linear velocity ($F(16, 607) = 1.30$, $p = 0.193$), suggesting these factors influence peak angular velocity independently. Post-hoc analyses revealed significant differences in peak angular velocity across time bins for all velocity groups (all $p < 0.001$), with the strongest effect observed in the ``Slow'' velocity group ($F = 21.86$). These findings indicate that while both the incoming speed and duration of central zone occupation affect the maximum turning rate, the time spent in the zone appears to be the dominant factor.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{example-image-a}
+    \caption{Your caption here}
+    \label{fig:your-label}
+\end{figure}
+
+Statistical analysis revealed significant relationships between flight kinematics and the execution of rapid turns in \textit{Drosophila melanogaster}. Multiple linear regression analysis ($n = 632$ flight trajectories) demonstrated that the duration of time spent within the trigger zone and the incoming flight velocity were significant predictors of peak angular velocity during the turn response ($R^2 = 0.280$, $F = 81.43$, $p < 1.65 \times 10^{-44}$). Time spent within the trigger zone exhibited the strongest positive correlation with peak angular velocity ($r = 0.508$, $\beta = 3.189$, $p < 0.001$), suggesting that prolonged exposure to the stimulus enhances turn magnitude. Conversely, higher incoming flight velocities were associated with reduced angular velocities ($r = -0.305$, $\beta = -1321.564$, $p < 0.001$), indicating a speed-dependent modulation of the turn response. Initial z-position showed no significant influence on turn kinematics ($r = -0.005$, $\beta = 262.379$, $p = 0.508$), suggesting that the vertical component of flight trajectory does not substantially impact the execution of the turning response.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{example-image-a}
+    \caption{Your caption here}
+    \label{fig:your-label}
+\end{figure}
+\end{document}

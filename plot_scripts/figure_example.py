@@ -1,9 +1,13 @@
 # AUTHOR: TOMAS CASSANELLI
 
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')  # Force matplotlib to use non-interactive backend
 import matplotlib.pyplot as plt
 from scipy.constants import golden
-
+import pdb
+import faulthandler
+faulthandler.enable()
 # to have the same configuration font as in your thesis_msc.tex file, I used a
 # plotting style for matplitlib, simply add the line
 
@@ -17,7 +21,7 @@ width = 6.85829  # in
 x1 = np.random.normal(0, 10, 1000)
 x2 = np.random.normal(0, 10, 1000)
 
-
+pdb.set_trace()
 fig, axes = plt.subplots(figsize=(width, width / golden / 2), ncols=2)
 
 axes[0].plot(x1, c='r')

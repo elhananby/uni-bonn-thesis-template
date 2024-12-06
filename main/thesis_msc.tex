@@ -2,7 +2,7 @@
 % TEMPLATE AUTHOR: TOMAS CASSANELLI
 
 % INITIAL CONFIGURATION
-\documentclass[a4paper, 10pt, twoside]{book}
+\documentclass[a4paper, 12pt, twoside]{book}
 
 \usepackage[              % Left and right margins
     DIV=18,               % You can play with these numbers for a better
@@ -29,8 +29,17 @@
 % PACKAGES
 \usepackage{amsmath,amssymb,mathrsfs}  % Basic math packages
 \usepackage{subfiles}
-\usepackage{natbib}                    % A&A bibliograsphy style
-\bibpunct{(}{)}{;}{a}{}{,}
+\usepackage[
+    backend=biber,
+    style=authoryear,
+    citestyle=authoryear,
+    sorting=nyt,
+    maxcitenames=2,
+    giveninits=true,
+    uniquename=init
+]{biblatex}
+\addbibresource{../references/refs.bib}
+
 
 
 \usepackage{upgreek}                   % More greek letters
@@ -38,7 +47,8 @@
 \usepackage{commath}
 \usepackage{forloop}
 \usepackage{blindtext}
-\usepackage[usenames, dvipsnames]{color}
+% \usepackage[usenames, dvipsnames]{color}
+\usepackage[usenames,dvipsnames]{xcolor}
 
 % to know the page width and adjust the image size!
 \usepackage{printlen} % \uselengthunit{in}\printlength{\textwidth}
@@ -112,12 +122,14 @@
     urlcolor=RoyalBlue
     }
 
+\usepackage{setspace}
+\usepackage{float}
+\onehalfspacing
 % DRAFT MODE: uncomment this for draft mode!
 % \usepackage[printwatermark]{xwatermark}
 % \newwatermark[allpages,color=red!10,angle=45,scale=3,xpos=0,ypos=0]{DRAFT}
 
 \begin{document}
-
     \frontmatter  % front and main matter to make roman numbers in between.
 
     % FIRST PAGE TITLE
@@ -233,10 +245,10 @@
     \mainmatter  % front and main matter to make roman numbers in between
 
     % BODY
-    \subfile{../chapter1/chapter1}
-    %\subfile{../chapter2/chapter2}
-    %\subfile{../chapter3/chapter3}
-    %\subfile{../chapter4/chapter4}
+    \subfile{../chapters/introduction}
+    \subfile{../chapters/methods}
+    \subfile{../chapters/results}
+    \subfile{../chapters/discussion}
     %\subfile{../chapter5/chapter5}
 
     % APPENDICES
@@ -248,8 +260,7 @@
     % REFERENCES
     % If you are using a windows machine and the bibliography doesn't work
     % remove the extension for .bst and .bib files here!
-    \bibliographystyle{../references/bibstyle_aa.bst}
-    \bibliography{../references/bibfile_thesis.bib}
+    \printbibliography[heading=bibintoc, title=Bibliography]
     \phantomsection
     \addcontentsline{toc}{chapter}{Bibliography}
 
